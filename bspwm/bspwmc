@@ -1,0 +1,37 @@
+#!/bin/bash
+# program to connect to external display
+# change the connection type according to your need in my case HDMI-1
+
+help(){
+    echo
+    echo "Usage  : connect -[flags]"
+    echo "-h     : help"
+    echo "-c     : connect to display in copy mode"
+    echo "-e     : connect to display in extend mode"
+    echo
+}
+
+# copying display to another display connected using hdmi
+connectCopy(){
+    xrandr --output HDMI-1 --mode 1920x1080
+}
+
+# extending your second monitor
+connectExtend(){
+    xrandr --output eDP-1 --primary --auto --output HDMI-1 --auto --right-of eDP-1
+}
+
+while getopts 'ceh' flag; do
+  case "${flag}" in
+    h) help
+       exit 0 ;;
+    c) connectCopy
+       exit 0 ;;
+    e) connectExtend
+       exit 0 ;;
+
+    *) echo "Invalid flag...(-h for help)"
+       exit 1 ;;
+  esac
+
+done
