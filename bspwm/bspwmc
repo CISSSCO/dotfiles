@@ -1,10 +1,9 @@
-#!/bin/bash
 # program to connect to external display
 # change the connection type according to your need in my case HDMI-1
 
 help(){
     echo
-    echo "Usage  : connect -[flags]"
+    echo "Usage  : bspwmc -[flags]"
     echo "-h     : help"
     echo "-c     : connect to display in copy mode"
     echo "-e     : connect to display in extend mode"
