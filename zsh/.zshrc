@@ -126,3 +126,19 @@ alias lvim='/home/abhi581b/.local/bin/lvim'
 # personal aliases
 alias q='exit'
 alias c='clear'
+export VISUAL=vim
+export EDITOR=vim
+export PATH="/home/abhi581b/git/gitPush:$PATH"
+
+
+if [[ "$TERM" == "dumb" ]]
+then
+    unsetopt zle
+    unsetopt prompt_cr
+    unsetopt prompt_subst
+    unfunction precmd
+    unfunction preexec
+    PS1='$ '
+fi
+export PATH="/home/abhi581b/git/gitPush:$PATH"
+export PATH="/home/abhi581b/.local/gitpush:$PATH"
