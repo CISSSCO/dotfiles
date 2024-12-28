@@ -3,29 +3,35 @@ filetype on
 filetype indent on
 filetype plugin on
 
+set so=7                        "Set 7 line to the cursor while moving vertically
 set encoding=UTF-8
-set backspace=indent,eol,start  "Fixing ctrl + backspace to delete previous word 
+set backspace=indent,eol,start  "Fixing ctrl + backspace to delete previous word
 set backspace=2
 set tabstop=4 softtabstop=4     "Insert 3 spaces for a tab
 set shiftwidth=4                "Changes the number of spaces chanracters inserted for indentation
 set smarttab                    "Makes tabbing smarter, it realize you have 2 vs 4
 set expandtab                   "Converts tabs to spaces
 set smartindent                 "Enables smart indent
+set autoindent                  "Good auto indent
 set cmdheight=2                 "More space for displaying messages
 set nu                          "Enables numberline
 set relativenumber              "Enables relative number line
 set nowrap                      "Desable the wrapping of long line test it will be now on single line
-set smartcase                   "Only applies to search patterns that you type 
-set mouse=a                     "Enables the mounse 
+set smartcase                   "Only applies to search patterns that you type
+set mouse=a                     "Enables the mounse
 set splitbelow                  "Split horizontal window to below
 set splitright                  "Split the vertical window to the right
 set t_Co=256                    "Support 256 colors
-set autoindent                  "Good auto indent
 set nobackup                    "Desable the creation of backup file in vim
+set nowb
 set noswapfile                  "Desable the creation of swap file for every file opened in vim
 set undodir=~/.vim/undodir      "Save our undo action to a particular directory
-set undofile                    "Creates a undo file 
+set undofile                    "Creates a undo file
 set incsearch                   "Enables increamental search
+set cmdheight=1                 "Set the height of cmd bar to 1
+"set foldcolumn=0
+"set wrap                       "enable wrap if necessary
+set cb=unnamedplus
 
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
@@ -60,7 +66,8 @@ Plug 'jiangmiao/auto-pairs'
 "devicons
 Plug 'ryanoasis/vim-devicons'
 "C++ Ultisnip
-
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
 "org mode
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
@@ -72,15 +79,25 @@ Plug 'tpope/vim-fugitive'
 Plug 'xuyuanp/nerdtree-git-plugin'
 
 "extra plugins
+"markdown
+"Plug 'plasticboy/vim-markdown'
+Plug 'gabrielelana/vim-markdown' "markdown syntax highlighter
+"open live markdown preview in browser
+Plug 'shime/vim-livedown'
 
 call plug#end()                 "End of vim-plug plugin listing
 
 set background=dark
 
+colorscheme whitebox
 "colorscheme gruvbox
+"colorscheme wildcharm
+"colorscheme vexorian
+"colorscheme Tomorrow-Night-Bright
 
 "setting a default font
 "set guifont=Source\ Code\ Pro:h22
+set guifont=DejaVuSansM\ Nerd\ Font\ Mono\ Regular\ 16
 
 "To desable errorbell
 set noerrorbells visualbell t_vb=
@@ -136,6 +153,9 @@ noremap! <C-h> <C-w>
 inoremap <C-w> <C-\><C-o>dB
 inoremap <C-BS> <C-\><C-o>db
 
+"ctrlp
+nnoremap <c-f> :CtrlP ~/<CR>
+
 "Desables automatic commenting on new line
 "autocmd FileType *setlocal formatoptions-=cro formatoptions-=r formatoptions-=o
 
@@ -155,6 +175,7 @@ nnoremap <leader>f :Goyo<CR>
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q!<CR>
 nnoremap <leader>x :x<CR>
+nnoremap <leader>s :Startify<CR>
 
 "hiding things
 "set guioptions-=m  "menu bar
@@ -172,12 +193,12 @@ endfunction
 
 map <F11> <Esc>:call ToggleGUICruft()<cr>
 map <F5>  :! zsh<CR>
-map <F4>  :! cp
+map <F4>  :! cp %
 
 " by default, hide gui menus
 set guioptions=i
 
-"winteractive 
+"winteractive
 nmap gw        :InteractiveWindow<CR>
 
 " Return to last edit position when opening files (You want this!)
@@ -188,7 +209,7 @@ autocmd BufReadPost *
 
 " shortcut to switch between buffer
 map J :bn<CR>
-map K :bp<CR> 
+map K :bp<CR>
 
 
 "Cursor modification
@@ -216,16 +237,16 @@ set guicursor+=i:ver100-iCursor
 
 "noremap <F8> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -DONPC -O2 -o %< % && ./%< < inp<CR>
 "inoremap <F8> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -DONPC -O2 -o "%<" "%" && "./%<" < inp<CR>
- 
+
 " -pthread
- 
+
 "noremap <F9> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>
 "inoremap <F9> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>
- 
+
 "noremap <F10> <ESC> :w <CR> :!clang++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>
 "inoremap <F10> <ESC> :w <CR> :!clang++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< <CR>
- 
- 
+
+
 "noremap <F10> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o %< % && ./%< < inp<CR>
 "inoremap <F10> <ESC> :w <CR> :!g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DONPC -O2 -o "%<" "%" && "./%<" < inp<CR>
 
@@ -235,32 +256,32 @@ noremap <F6> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow -O2 <CR>
 inoremap <F6> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow -O2 <CR>
 
 "running c code
-map <F3> :!gcc  -g  % -Wall -Wextra -Wshadow -O2 -lpthread && ./a.out <CR>
-inoremap <F7> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow  -O2 && ./a.out <CR>
+"map <F3> :!gcc  -g  % -Wall -Wextra -Wshadow -O2 -lpthread && ./a.out <CR>
+"inoremap <F7> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow  -O2 && ./a.out < input<CR>
 "Debug c code
-noremap <F8> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow -O2  && gdb ./a.out <CR>
-inoremap <F8> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow -O2  && gdb ./a.out <CR>
+"noremap <F8> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow -O2  && gdb ./a.out <CR>
+"inoremap <F8> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow -O2  && gdb ./a.out <CR>
 
 "Compiler settings for c++
 "compiling c++ code
-noremap <F9> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow -O2<CR>
-inoremap <F9> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow -O2<CR>
+"noremap <F9> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow -O2<CR>
+"inoremap <F9> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow -O2<CR>
 "running c++ code
-noremap <F10> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && ./a.out <CR>
-inoremap <F10> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && ./a.out <CR>
- 
+noremap <F3> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && ./a.out <CR>
+inoremap <F3> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && ./a.out <CR>
+
 "compile + run in debug mode in c++
-noremap <F12> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && gdb ./a.out <CR>
-inoremap <F12> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && gdb ./a.out <CR>
+"noremap <F12> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && gdb ./a.out <CR>
+"inoremap <F12> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && gdb ./a.out <CR>
 
 
 
 "copying and pasting into system clipboard
 
-noremap <Leader>y "*y
-noremap <Leader>p "*p
-noremap <Leader>Y "+y
-noremap <Leader>P "+p
+"noremap <Leader>y "*y
+"noremap <Leader>p "*p
+"noremap <Leader>Y "+y
+"noremap <Leader>P "+p
 
 let g:NERDTreeGitStatusUseNerdFonts = 1 " you should install nerdfonts by yourself. default: 0
 "nerdtree git custom icons
@@ -313,3 +334,10 @@ let g:startify_files_number = 11
 let g:startify_session_persistence= 1
 
 "let g:startify_center = 1
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
