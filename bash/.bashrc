@@ -132,3 +132,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 export PATH=~/.npm-global/bin:$PATH
+export VISUAL=vim;
+export EDITOR=vim;
+alias doom='/home/abhi581b/.config/emacs/bin/doom run'
