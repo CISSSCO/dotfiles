@@ -10,6 +10,10 @@
 ;; (package! some-package)
 
 (package! tramp-term)
+(package! org-bullets)
+(package! visual-fill-column)
+(package! org-present)
+
 
 
 ;; To install a package directly from a remote git repo, you must specify a

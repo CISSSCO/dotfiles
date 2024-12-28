@@ -32,11 +32,11 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one-light)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
+(setq display-line-numbers-type t)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -71,6 +71,7 @@
 ;; This will open documentation for it, including demos of how they are used.
 ;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
 ;; etc).
+;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
@@ -90,43 +91,72 @@
    (bash . t)
    (javascript . t)))
 
-
 (setq org-confirm-babel-evaluate nil)
 (setq-default evil-escape-key-sequence "kj")
-;;(setq-default evil-escape-key-sequence "jk")
-
-;; Disable subscript and superscript interpretation during export
-(setq org-export-with-sub-superscripts '{})
+(setq-default evil-escape-key-sequence "jk")
 
 
-;;; Theme and Fonts ----------------------------------------
-
-;; Install doom-themes
-(unless (package-installed-p 'doom-themes)
-  (package-install 'doom-themes))
-
-;; Load up doom-palenight for the System Crafters look
-;;(load-theme 'doom-palenight t)
 
 
-;; Set tab width to 4 spaces globally
-(setq-default tab-width 4)
 
-;; Use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
 
-;; Enable auto-indentation globally
-(electric-indent-mode 1)
 
-;; Enable auto-indentation in programming modes
-(add-hook 'prog-mode-hook 'electric-indent-mode)
+;; Basic Org mode setup
+(setq org-hide-emphasis-markers t)
+(add-hook 'org-mode-hook 'visual-line-mode)
+(add-hook 'org-mode-hook 'org-indent-mode)
 
-;; Specific settings for Python
-(use-package! python
-  :config
-  (setq python-indent-offset 4))
 
-;; Specific settings for C/C++
-(use-package! cc-mode
-  :config
-  (setq c-basic-offset 4))
+(defun my/org-present-prepare-slide ()
+  "Custom behavior for each slide in org-present."
+  (org-overview)
+  (org-show-entry)
+  (org-show-children))
+
+(defun my/org-present-start ()
+  "Custom settings for org-present mode."
+  ;; Set font size for headings
+  (setq-local face-remapping-alist '((default (:height 2.0) variable-pitch)
+                                     (header-line (:height 4.0) variable-pitch)
+                                     (org-document-title (:height 2.75) org-document-title)
+                                     (org-level-1 (:height 2.0 :weight bold) org-level-1)
+                                     (org-level-2 (:height 1.5) org-level-2)
+                                     (org-level-3 (:height 1.25) org-level-3)
+                                     (org-level-4 (:height 1.1) org-level-4)
+                                     (org-level-5 (:height 1.1) org-level-5)
+                                     (org-level-6 (:height 1.1) org-level-6)
+                                     (org-level-7 (:height 1.1) org-level-7)
+                                     (org-level-8 (:height 1.1) org-level-8)))
+  ;; Center the text
+  (setq-local visual-fill-column-center-text t)
+  (setq-local visual-fill-column-width 80)
+  (visual-fill-column-mode 1)
+  ;; Prepare each slide
+  (my/org-present-prepare-slide)
+  ;; Hide org mode markers
+  (org-hide-emphasis-markers t)
+  ;; Turn on org-indent mode
+  (org-indent-mode t)
+  ;; Center first-level heading
+  (setq header-line-format " "))
+
+
+(defun my/org-present-end ()
+  "Revert settings when org-present mode ends."
+  ;; Remove custom font size settings
+  (setq-local face-remapping-alist '((default variable-pitch default)))
+  ;; Remove centering
+  (visual-fill-column-mode 0)
+  ;; Restore org mode markers
+  (org-hide-emphasis-markers nil)
+  ;; Remove hook
+  (remove-hook 'org-present-after-navigate-functions 'my/org-present-prepare-slide)
+  ;; Turn off org-indent mode
+  (org-indent-mode -1)
+  (setq header-line-format nil))
+
+(with-eval-after-load 'org-present
+  (add-hook 'org-present-mode-hook 'my/org-present-start)
+  (add-hook 'org-present-mode-quit-hook 'my/org-present-end))
+
+;;; init.el ends here
