@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one-light)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -130,3 +130,21 @@
 (use-package! cc-mode
   :config
   (setq c-basic-offset 4))
+
+(use-package dmenu
+  :ensure t
+  :bind
+  ("C-c d d" . dmenu))
+
+(use-package exwm
+  :ensure t
+  :config
+  (require 'exwm-config)
+  (exwm-config-default))
+
+;; (require 'exwm-randr)
+;; (exwm-randr-enable)
+;; (start-process-shell-command "xrandr" nil "xrandr -s 1920x1080")
+
+(require 'exwm-systemtray)
+(exwm-systemtray-enable)
