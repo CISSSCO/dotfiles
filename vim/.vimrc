@@ -31,7 +31,7 @@ set incsearch                   "Enables increamental search
 set cmdheight=1                 "Set the height of cmd bar to 1
 "set foldcolumn=0
 "set wrap                       "enable wrap if necessary
-set cb=unnamedplus
+set cb=unnamedplus              "allowing copy paste
 
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
@@ -84,6 +84,9 @@ Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'gabrielelana/vim-markdown' "markdown syntax highlighter
 "open live markdown preview in browser
 Plug 'shime/vim-livedown'
+
+"fugitive for git
+Plug 'tpope/vim-fugitive'
 
 call plug#end()                 "End of vim-plug plugin listing
 
