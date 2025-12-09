@@ -6,8 +6,12 @@ super + F10
 	gnome-screenshot -i
 
 # lower brightness to zero temporarily
-super + l
+super + x
 	/home/abhi581b/.config/polybar/shapes/scripts/powermenu.sh
+
+super + p
+	/home/abhi581b/.config/polybar/shapes/scripts/powermenu.sh
+
 # terminal emulator
 super + Return
 	xfce4-terminal
@@ -91,6 +95,7 @@ super + {o,i}
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
+
 
 #
 # preselect
