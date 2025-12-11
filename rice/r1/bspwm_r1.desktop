@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=bspwm_custom
+Comment=binary search partition window manager
+Exec=bspwm -c /home/abhi581b/.config/rice/r1/bspwm/bspwmrc
+Icon=bspwm
+Type=XSession

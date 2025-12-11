@@ -1,0 +1,39 @@
+#! /bin/sh
+
+#pgrep -x sxhkd > /dev/null || sxhkd &
+# Wallpaper
+feh --bg-fill ~/Pictures/wallpaper/gruvbox.png &
+
+# Compositor
+picom --config ~/.config/rice/r1/picom/picom.conf &
+sxhkd -c ~/.config/rice/r1/sxhkd/sxhkdrc &
+#pkill -USR1 -x sxhkd &
+#xsetroot -cursor_name left_ptr &
+xsetroot -cursor_name left_ptr
+#unclutter --timeout 2 
+
+#picom --config /home/abhi581b/.config/picom/picom.conf &
+#picom &
+#nitrogen --restore &
+
+bspc monitor -d I II III IV V VI VII VIII IX X
+# Configure monitors and desktops
+#bspc monitor eDP-1 -d I II III IV V
+#bspc monitor HDMI-1 -d VI VII VIII IX X
+#bspc monitor DP-2 -d VI VII VIII IX X
+
+#~/.config/polybar/launch.sh --shapes
+
+bspc config border_width         1
+bspc config window_gap          12
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+#bspc rule -a slack desktop='^5' state=floating follow=on
+bspc rule -a Chromium desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
