@@ -1,0 +1,321 @@
+" =========================
+" Core Vim settings
+" =========================
+syntax on                       " Enables syntax highlighting
+filetype plugin indent on       " Detect filetype, load plugins, enable indent
+
+set lazyredraw
+set ttyfast
+"set termguicolors
+
+set so=7                        " Keep 7 lines visible around cursor
+set encoding=UTF-8
+set backspace=indent,eol,start  " Proper backspace behavior
+
+set t_Co=256
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set smarttab
+set expandtab
+set smartindent
+set autoindent
+
+set cmdheight=1
+set nu
+set relativenumber
+set nowrap
+set smartcase
+set mouse=a
+set splitbelow
+set splitright
+
+set nobackup
+set nowb
+set noswapfile
+
+set undodir=~/.vim/undodir
+set undofile
+
+if !isdirectory(expand("~/.vim/undodir"))
+  call mkdir(expand("~/.vim/undodir"), "p")
+endif
+
+set incsearch
+set cb=unnamedplus
+
+highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+
+" =========================
+" Plugins (vim-plug)
+" =========================
+call plug#begin('~/.vim/plugged/')
+
+Plug 'frazrepo/vim-rainbow'
+Plug 'junegunn/goyo.vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'romgrk/winteract.vim'
+Plug 'anotherproksy/ez-window'
+Plug 'felixhummel/setcolors.vim'
+Plug 'vim-scripts/Conque-Shell'
+Plug 'gko/vim-coloresque'
+Plug 'lambdalisue/vim-fullscreen'
+Plug 'preservim/nerdtree'
+Plug 'mhinz/vim-startify'
+Plug 'leafgarland/typescript-vim'
+Plug 'vim-utils/vim-man'
+Plug 'kien/ctrlp.vim'
+Plug 'mbbill/undotree'
+Plug 'jiangmiao/auto-pairs'
+Plug 'ryanoasis/vim-devicons'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
+Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'gabrielelana/vim-markdown'
+Plug 'shime/vim-livedown'
+Plug 'tpope/vim-fugitive'
+
+call plug#end()
+
+
+" =========================
+" Colors & Fonts
+" =========================
+
+set background=dark
+"colorscheme whitebox
+"colorscheme wildcharm
+"colorscheme vexorian
+"colorscheme Tomorrow-Night-Bright
+colorscheme gruvbox
+"colorscheme mushroom
+
+set guifont=DejaVuSansM\ Nerd\ Font\ Mono\ Regular\ 16
+
+
+" =========================
+" Error bell
+" =========================
+set noerrorbells visualbell t_vb=
+if has('autocmd')
+  autocmd GUIEnter * set visualbell t_vb=
+endif
+
+
+" =========================
+" netrw / ctrlp
+" =========================
+let g:netrw_browse_split=2
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+
+nnoremap <c-f> :CtrlP ~/<CR>
+let g:ctrlp_use_caching = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.git|node_modules|build|dist|\.cache)$',
+  \ 'file': '\v\.(o|obj|bin|exe|class)$',
+\ }
+
+
+" =========================
+" Leader & Keybindings
+" =========================
+let mapleader = " "
+
+nnoremap <leader>c :colorscheme
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+nnoremap <silent> <leader>+ :vertical resize +5<CR>
+nnoremap <silent> <leader>- :vertical resize -5<CR>
+
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+" Ctrl-Backspace (clean, single mapping)
+inoremap <C-BS> <C-\><C-o>db
+
+
+"map <TAB> %
+
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q!<CR>
+nnoremap <leader>x :x<CR>
+
+
+" =========================
+" GUI controls
+" =========================
+function! ToggleGUICruft()
+  if &guioptions=='i'
+    set guioptions=imTrL
+  else
+    set guioptions=i
+  endif
+endfunction
+
+map <F11> :call ToggleGUICruft()<CR>
+map <F5>  :!zsh<CR>
+map <F4>  :!cp %
+
+set guioptions=i
+
+
+" =========================
+" Interactive window
+" =========================
+nmap gw :InteractiveWindow<CR>
+
+
+" =========================
+" Restore cursor position
+" =========================
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+
+" =========================
+" Buffer navigation
+" =========================
+map J :bn<CR>
+map K :bp<CR>
+
+
+" =========================
+" Cursor appearance (GUI)
+" =========================
+highlight Cursor guifg=green guibg=orangered
+highlight iCursor guifg=green guibg=greenyellow
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+
+
+" =========================================================
+" =============== C / C++ COMPILER SETTINGS ===============
+" =========================================================
+
+"for Windows
+"Here -O2 will optimize your code to level 2
+"nnoremap <F9> :!g++ -std=c++11 % -Wall -g -o %< && %< <CR>
+"nnoremap <F2> :!g++  -std=c++14  % -Wall -Wextra -Wshadow -g -o %< && %< <CR>
+"inoremap <F2> :!g++  -std=c++14  % -Wall -Wextra -Wshadow -g -o %< && %< <CR>
+
+"for windows including input file
+"nnoremap <F3> :!g++ -std=c++14 % -Wall -Wextra -Wshadow -g -o %< && %< < input <CR>
+
+"Compiler settings for C for linux
+noremap <F6> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow -O2 <CR>
+inoremap <F6> <ESC> :w <CR> :!gcc  -g  % -Wall -Wextra -Wshadow -O2 <CR>
+
+noremap <F9> <ESC> :w <CR> :!g++  -g  % -Wall -Wextra -Wshadow -O2 && ./a.out<CR>
+inoremap <F9> <ESC> :w <CR> :!g++  -g  % -Wall -Wextra -Wshadow -O2 && ./a.out<CR>
+
+"Compiler settings for C++
+noremap <F3> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && ./a.out < input <CR>
+inoremap <F3> <ESC> :w <CR> :!g++ -std=c++14 -g  % -Wall -Wextra -Wshadow  -O2 && ./a.out < input <CR>
+
+
+" =========================
+" NERDTree Git icons
+" =========================
+let g:NERDTreeGitStatusUseNerdFonts = 1
+
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+
+
+" =========================
+" Rainbow brackets
+" =========================
+let g:rainbow_active = 1
+let g:rainbow_load_separately = [
+    \ [ '*' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.tex' , [['(', ')'], ['\[', '\]']] ],
+    \ [ '*.cpp' , [['(', ')'], ['\[', '\]'], ['{', '}']] ],
+    \ [ '*.{html,htm}' , [['(', ')'], ['\[', '\]'], ['{', '}'], ['<\a[^>]*>', '</[^>]*>']] ],
+    \ ]
+
+
+" =========================
+" ASCII ART 
+" =========================
+let g:ascii = [
+            \'',
+            \'    ██████╗██╗███████╗ ██████╗ ██████╗     ██████╗  █████╗ ███╗   ███╗ ██████╗ ███╗   ██╗',
+            \'   ██╔════╝██║██╔════╝██╔════╝██╔═══██╗    ██╔══██╗██╔══██╗████╗ ████║██╔═══██╗████╗  ██║',
+            \'   ██║     ██║███████╗██║     ██║   ██║    ██████╔╝███████║██╔████╔██║██║   ██║██╔██╗ ██║',
+            \'   ██║     ██║╚════██║██║     ██║   ██║    ██╔══██╗██╔══██║██║╚██╔╝██║██║   ██║██║╚██╗██║',
+            \'   ╚██████╗██║███████║╚██████╗╚██████╔╝    ██║  ██║██║  ██║██║ ╚═╝ ██║╚██████╔╝██║ ╚████║',
+            \'    ╚═════╝╚═╝╚══════╝ ╚═════╝ ╚═════╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝',
+            \'',
+            \]
+
+
+" =========================
+" Startify
+" =========================
+nnoremap <leader>s :Startify<CR>
+let g:startify_lists = [
+          \ { 'type': 'files',     'header': ['   MRU'] },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks'] },
+          \ { 'type': 'commands',  'header': ['   Commands'] },
+          \ ]
+
+let g:startify_change_to_dir = 1
+let g:startify_fortune_use_unicode = 1
+let g:startify_custom_header = g:ascii + startify#fortune#boxed()
+let g:startify_files_number = 11
+let g:startify_session_persistence = 1
+let g:startify_enable_special = 0
+let g:startify_update_oldfiles = 1
+
+" =========================
+" UltiSnips
+" =========================
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader>n"
+let g:UltiSnipsJumpBackwardTrigger="<leader>b"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories = ['UltiSnips']
+let g:UltiSnipsEnableSnipMate = 0
+
+" =========================
+" Goyo
+" =========================
+nnoremap <leader>f :Goyo<CR>
+let g:goyo_width = 90
+let g:goyo_height = '85%'
+
+" =========================
+" Nerd Tree
+" =========================
+nnoremap <leader>. :NERDTreeToggle<CR>
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeAutoDeleteBuffer = 1
+
+" =========================
+" Undo Tree
+" =========================
+nnoremap <leader>u :UndotreeToggle<CR>
+let g:undotree_WindowLayout = 2
+let g:undotree_SetFocusWhenToggle = 1
+
