@@ -32,8 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-;; (setq doom-theme 'doom-one)
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -132,150 +131,20 @@
   :config
   (setq c-basic-offset 4))
 
-
 (use-package dmenu
   :ensure t
   :bind
   ("C-c d d" . dmenu))
 
+(use-package exwm
+  :ensure t
+  :config
+  (require 'exwm-config)
+  (exwm-config-default))
 
 ;; (require 'exwm-randr)
 ;; (exwm-randr-enable)
 ;; (start-process-shell-command "xrandr" nil "xrandr -s 1920x1080")
 
-;; (require 'exwm-systemtray)
-;; (exwm-systemtray-enable)
-
-;;; ~/.doom.d/config.el
-
-;; ---------------------------
-;; EXWM (Emacs X Window Manager)
-;; ---------------------------
-
-;;(use-package exwm
-;; :ensure t
-;; :config
-;; )
-
-(with-eval-after-load 'ox
-  (require 'ox-reveal))
-
-
-(after! ox-reveal
-  (setq org-reveal-root "https://cdn.jsdelivr.net/npm/reveal.js"
-        org-reveal-theme "solarized"
-        org-reveal-transition "fade"
-        org-reveal-slide-number t
-        ;; OPTIONAL: Use heading level 2 as slide break depth
-        org-export-headline-levels 2))
-
-(after! ox-reveal
-  (setq org-reveal-extra-css "~/.config/doom/org-reveal/scroll.css"))
-(after! ox-reveal
-  (setq org-reveal-center nil))   ;; <— this stops vertical centering
-
-
-;; org present
-;; Robust org-present folding behavior
-(after! org-present
-  ;; Helper: fold everything and reveal only current entry (safe)
-  (defun my/org-present-show-current-only (&rest _)
-    "Fold the buffer, then show only the current headline entry.
-Accepts arbitrary args so it is safe as a hook function."
-    (ignore-errors
-      ;; Fold everything
-      (when (fboundp 'org-overview) (org-overview))
-      ;; Show current headline body
-      (when (fboundp 'org-show-entry) (org-show-entry))
-      ;; Keep direct children collapsed (show only the headline, not expanded)
-      ;; org-show-children can accept an arg; wrap in ignore-errors to avoid bad-arg errors
-      (ignore-errors (when (fboundp 'org-show-children) (org-show-children 0)))))
-
-  ;; Hook to run when entering org-present-mode
-  (add-hook 'org-present-mode-hook
-            (lambda ()
-              (ignore-errors
-                ;; Apply folding behaviour right away
-                (my/org-present-show-current-only)
-                ;; Hide mode-line if available
-                (when (fboundp 'hide-mode-line-mode) (hide-mode-line-mode 1)))))
-
-  ;; Hook to reapply on navigation; accepts any args from the caller
-  (add-hook 'org-present-after-navigate-functions
-            (lambda (&rest args)
-              (ignore-errors
-                (my/org-present-show-current-only)))))
-
-
-;; Disable Org default styles (CRITICAL for GitHub look)
-(setq org-html-head-include-default-style nil)
-(setq org-html-head-include-scripts nil)
-(setq org-html-htmlize-output-type nil)
-
-(defun cisco/org-html-filter (buffer)
-  (with-current-buffer buffer
-    (let ((html
-           (org-export-as
-            'html nil nil t
-            '(:with-toc nil
-              :section-numbers nil
-              :html-postamble nil
-              :html-preamble nil
-              :html-head nil
-              :html-head-extra nil))))
-      (concat
-       "<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet'
- href='https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown.min.css'>
-<style>
-body {
-  background: #0d1117;
-}
-.markdown-body {
-  box-sizing: border-box;
-  min-width: 200px;
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 45px;
-  background: #0d1117;
-  color: #c9d1d9;
-}
-.markdown-body pre {
-  background-color: #161b22;
-}
-.markdown-body table {
-  background-color: #0d1117;
-}
-</style>
-</head>
-<body>
-<article class='markdown-body'>"
-       html
-       "</article>
-</body>
-</html>"))))
-
-
-(defun cisco/org-live-preview ()
-  "Live GitHub-style preview for Org files."
-  (interactive)
-  (require 'impatient-mode)
-  (require 'ox-html)
-  (require 'simple-httpd)
-
-  (setq httpd-port 8080)
-  (httpd-start)
-
-  (setq impatient-mode-delay 0.2)
-
-  (imp-set-user-filter #'cisco/org-html-filter)
-  (impatient-mode 1)
-
-  (browse-url
-   (format "http://localhost:%d/imp/live/%s/"
-           httpd-port
-           (url-hexify-string (buffer-name)))))
+(require 'exwm-systemtray)
+(exwm-systemtray-enable)

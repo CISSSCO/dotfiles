@@ -13,6 +13,11 @@
 (package! org-bullets)
 (package! visual-fill-column)
 (package! org-present)
+(package! ox-reveal)
+(package! vterm)
+(package! impatient-mode)
+;; (package! yaml)
+
 
 
 

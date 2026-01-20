@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: org-reveal header template
+# key: reveal
+# --
+#+TITLE: ${1:README}
+#+AUTHOR: ${2:Abhishek Raj}
+#+DATE: `(format-time-string "%Y-%m-%d")`
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_THEME: solarized
+#+REVEAL_TRANS: fade
+#+REVEAL_SLIDE_NUMBER: t
+#+OPTIONS: toc:nil num:nil timestamp:nil
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+$0
