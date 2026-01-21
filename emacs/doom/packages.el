@@ -17,6 +17,8 @@
 (package! vterm)
 (package! impatient-mode)
 ;; (package! yaml)
+(package! org-superstar)
+(package! org-modern)
 
 
 
