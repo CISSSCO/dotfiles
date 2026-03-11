@@ -102,6 +102,10 @@
 
 ;;; Theme and Fonts ----------------------------------------
 
+;; Install doom-themes
+(unless (package-installed-p 'doom-themes)
+  (package-install 'doom-themes))
+
 ;; Load up doom-palenight for the System Crafters look
 ;;(load-theme 'doom-palenight t)
 
@@ -129,6 +133,10 @@
   (setq c-basic-offset 4))
 
 
+(use-package dmenu
+  :ensure t
+  :bind
+  ("C-c d d" . dmenu))
 
 
 ;; (require 'exwm-randr)
@@ -570,43 +578,3 @@ document.getElementById('content').innerHTML =
         org-modern-hide-stars nil
         org-modern-block-fringe nil
         org-modern-table nil))
-
-(use-package undo-tree
-  :init
-  ;; enable undo-tree everywhere
-  (global-undo-tree-mode)
-
-  :config
-  ;; ---------------------------
-  ;; persistent undo history
-  ;; ---------------------------
-  (setq undo-tree-auto-save-history t)
-
-  (setq undo-tree-history-directory-alist
-        `(("." . ,(expand-file-name "undotree/" user-emacs-directory))))
-
-  ;; ---------------------------
-  ;; visualizer layout
-  ;; ---------------------------
-  (setq undo-tree-visualizer-side 'right)
-  (setq undo-tree-visualizer-window-width 60)
-
-  ;; do NOT show diff automatically
-  (setq undo-tree-visualizer-diff nil)
-
-  ;; timestamps
-  (setq undo-tree-visualizer-timestamps t)
-  (setq undo-tree-visualizer-relative-timestamps t)
-
-  ;; ESC closes visualizer
-  (define-key undo-tree-visualizer-mode-map
-    (kbd "<escape>")
-    #'undo-tree-visualizer-quit)
-
-  ;; leader key
-  (map! :leader
-        :desc "Undo Tree"
-        "u" #'undo-tree-visualize))
-
-;;;; Org Roam Setup
-(setq org-roam-directory "~/git/docs/roam")

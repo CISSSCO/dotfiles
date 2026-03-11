@@ -19,7 +19,6 @@
 ;; (package! yaml)
 (package! org-superstar)
 (package! org-modern)
-(package! undo-tree)
 
 
 
