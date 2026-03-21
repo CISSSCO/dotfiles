@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: gcd
+# key: gcd
+# --
+__gcd(${1:a}, ${2:b});

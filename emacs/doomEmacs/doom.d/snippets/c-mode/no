@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: NO
+# key: no
+# --
+printf("NO\n");

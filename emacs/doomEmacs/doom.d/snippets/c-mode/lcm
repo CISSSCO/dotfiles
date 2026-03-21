@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: lcm
+# key: lcm
+# --
+(${1:a} / __gcd(${1:a}, ${2:b})) * ${2:b};

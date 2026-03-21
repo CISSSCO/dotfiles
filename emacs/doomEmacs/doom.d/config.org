@@ -1,3 +1,9 @@
+#+title: CISSSCO's Doom Emacs
+#+startup: content indent
+
+* Top
+#+begin_src emacs-lisp :tangle config.el
+
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
@@ -76,30 +82,70 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
+#+end_src
+* Basic
+** LSP
+Turning off lsp completion (ctrl + spc) to toggle it
+#+begin_src emacs-lisp :tangle config.el
 (setq company-idle-delay nil)
-
+#+end_src
+** Dired
+*** Making deleted files go to trash
+#+begin_src emacs-lisp :tangle config.el
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files")
+#+end_src
 
+*** Create symlink for Trash in your home folder
+Run below block if you don't have symlink already created in home. Make sure to remove ~:eval no~ to enable evaluation.
+#+begin_src bash :eval no
+cd ~/
+ln -s ~/.local/share/Trash ./
+#+end_src
+
+* Load Paths
+** Basic
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/basic")
+#+end_src
 
+** Reveal
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/reveal")
+#+end_src
 
+** Org Present
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/orgPresent")
+#+end_src
 
+** Live Preview
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/livePreview")
+#+end_src
 
+** Org Modern
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/orgModern")
+#+end_src
 
+** Org Roam
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/orgRoam")
+#+end_src
 
+** Org Faces
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/orgFaces")
+#+end_src
 
+** Pdf
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/pdf")
+#+end_src
 
+** CP
+#+begin_src emacs-lisp :tangle config.el
 (load! "config/cp")
+#+end_src
 
-(after! all-the-icons
-  (load! "config/universal-launcher"))
-
-(global-set-key (kbd "C-M-SPC") #'universal-launcher-popup)

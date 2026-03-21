@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: unordered_set
+# key: uset
+# --
+unordered_set<${1:int}> ${2:s};

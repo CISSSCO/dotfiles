@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: lower_bound
+# key: lb
+# --
+lower_bound(${1:v}.begin(), ${1:v}.end(), ${2:x});

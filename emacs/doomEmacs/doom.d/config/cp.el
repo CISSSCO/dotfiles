@@ -1,35 +1,68 @@
 ;;; config/cp.el -*- lexical-binding: t; -*-
-
-
 (defun cisco/contest ()
   (interactive)
   (let* (
-         ;; base paths (aligned with your config)
-         (org-base "~/git/docs/org/")
+         ;; updated paths
+         (org-base "~/git/org/")
+         (roam-base "~/git/org/roam/")
          (contest-base (concat org-base "contest/"))
 
          ;; timestamp
          (timestamp (format-time-string "%Y-%m-%d-%H%M"))
 
-         ;; folder + files
+         ;; contest folder (code files)
          (contest-dir (concat contest-base timestamp "/"))
          (main-file (concat contest-dir "main.cpp"))
          (input-file (concat contest-dir "input.txt"))
          (output-file (concat contest-dir "output.txt"))
-         (notes-file (concat contest-dir "notes.org"))
 
-         ;; relative path for org linking
-         (relative-path (concat "contest/" timestamp "/"))
+         ;; roam files
+         (contest-node (concat roam-base "contest/" timestamp ".org"))
+         (central-node (concat roam-base "contest/contest.org"))
+
+         contest-id central-id
          )
 
-    ;; ensure base exists
-    (unless (file-directory-p contest-base)
-      (make-directory contest-base t))
-
-    ;; create contest folder
+    ;; ensure dirs
     (make-directory contest-dir t)
+    (make-directory (file-name-directory contest-node) t)
 
-    ;; create files
+    ;; create central contest node if not exists
+    (unless (file-exists-p central-node)
+      (with-temp-file central-node
+        (insert "#+title: Contest\n#+filetags: contest\n\n* All Contests\n")))
+
+    ;; ensure central node has ID
+    (with-current-buffer (find-file-noselect central-node)
+      (org-id-get-create)
+      (setq central-id (org-id-get))
+      (save-buffer))
+
+    ;; create symlink inside contest folder → points to roam node
+    (let ((symlink-path (concat contest-dir "contest.org")))
+    (unless (file-exists-p symlink-path)
+        (make-symbolic-link (expand-file-name contest-node) symlink-path)))
+
+    ;; create contest node
+    (unless (file-exists-p contest-node)
+      (with-temp-file contest-node
+        (insert (format "#+title: Contest %s\n#+filetags: contest\n\n* Files\n- [[file:%s][Open Folder]]\n"
+                        timestamp contest-dir))))
+
+    ;; ensure contest node has ID
+    (with-current-buffer (find-file-noselect contest-node)
+      (org-id-get-create)
+      (setq contest-id (org-id-get))
+      (save-buffer))
+
+    ;; append ID-based link to central node (GRAPH FIX)
+    (with-current-buffer (find-file-noselect central-node)
+      (goto-char (point-max))
+      (insert (format "\n- [[id:%s][Contest %s]]"
+                      contest-id timestamp))
+      (save-buffer))
+
+    ;; create code files (UNCHANGED)
     (unless (file-exists-p main-file)
       (with-temp-file main-file
         (insert "#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    ios::sync_with_stdio(false);\n    cin.tie(NULL);\n\n    \n\n    return 0;\n}\n")))
@@ -40,11 +73,7 @@
     (unless (file-exists-p output-file)
       (write-region "" nil output-file))
 
-    (unless (file-exists-p notes-file)
-      (with-temp-file notes-file
-        (insert "#+title: Contest " timestamp "\n\n* Problems\n\n")))
-
-    ;; layout (like your screenshot)
+    ;; layout (UNCHANGED)
     (delete-other-windows)
     (find-file main-file)
 
@@ -58,11 +87,11 @@
 
     (other-window -2)
 
-    ;; ORG-ROAM DAILY LINKING (fixed)
+    ;; DAILY LINK (NOW USING ID → graph connected)
     (when (featurep 'org-roam)
       (let* ((main-win (selected-window))
-             (link (format "[[file:%s][Contest %s]]"
-                           (expand-file-name notes-file)
+             (link (format "[[id:%s][Contest %s]]"
+                           contest-id
                            timestamp)))
 
         (save-window-excursion
@@ -71,7 +100,6 @@
           (insert (format "\n* Contest\n- %s\n" link))
           (save-buffer))
 
-        ;; restore focus to main.cpp
         (select-window main-win)))))
 
 (defun cisco/run-cpp ()

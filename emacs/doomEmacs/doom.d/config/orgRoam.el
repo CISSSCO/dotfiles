@@ -5,7 +5,7 @@
 ;; BASIC ORG SETTINGS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq org-directory "~/git/docs/org/")
+(setq org-directory "~/git/org")
 
 (after! org
   (setq org-startup-indented t
@@ -23,7 +23,7 @@
 ;; ORG ROAM CORE
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq org-roam-directory (file-truename "~/git/docs/org/roam/"))
+(setq org-roam-directory (file-truename "~/git/org/roam/"))
 
 (unless (file-directory-p org-roam-directory)
   (make-directory org-roam-directory t))
