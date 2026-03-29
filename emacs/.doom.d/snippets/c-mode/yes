@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: YES
+# key: yes
+# --
+printf("YES\n");

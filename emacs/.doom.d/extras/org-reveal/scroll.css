@@ -1,0 +1,62 @@
+/* .reveal .slides section { */
+/*     height: 100% !important; */
+/*     overflow-y: auto !important; */
+/* } */
+
+
+
+
+
+/* /\* Allow vertical scrolling for full slides *\/ */
+/* .reveal .slides section { */
+/*   height: 100% !important; */
+/*   max-height: 100% !important; */
+/*   overflow-y: auto !important; */
+/*   overflow-x: hidden !important;  */
+/*   display: block !important; */
+/* } */
+
+/* /\* Prevent Reveal.js from shrinking content *\/ */
+/* .reveal .slides { */
+/*   height: auto !important; */
+/* } */
+
+/* /\* Prevent headers from shrinking or getting clipped *\/ */
+/* .reveal h1, .reveal h2, .reveal h3, .reveal p { */
+/*   max-width: 90%; */
+/* } */
+
+/* /\* Optional: nicer scroll bar *\/ */
+/* .reveal .slides section::-webkit-scrollbar { */
+/*   width: 8px; */
+/* } */
+/* .reveal .slides section::-webkit-scrollbar-thumb { */
+/*   background: #888; */
+/*   border-radius: 4px; */
+/* } */
+
+
+
+
+.reveal .slides section {
+  height: auto !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+/* Disable slide vertical centering */
+.reveal .slides {
+  align-items: flex-start !important;
+}
+
+/* Allow scrolling for long content */
+.reveal .slides section.present {
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+}
+
+/* Optional: remove padding so things don't look cramped */
+.reveal section {
+  padding-top: 1em !important;
+}

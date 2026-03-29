@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: read vector
+# key: readv
+# --
+for (auto &${1:x} : ${2:v}) cin >> ${1:x};

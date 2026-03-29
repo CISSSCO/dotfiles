@@ -32,11 +32,7 @@
 
 ;; optional
 (package! org-roam-timestamps)
-(package! posframe)
-(package! all-the-icons)
-(package! counsel)
-(package! app-launcher
-  :recipe (:host github :repo "SebastienWae/app-launcher"))
+
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

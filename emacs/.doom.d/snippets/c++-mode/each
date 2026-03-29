@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: range loop
+# key: each
+# --
+for (auto &${1:x} : ${2:container}) {
+    $0
+}

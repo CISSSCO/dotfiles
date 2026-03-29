@@ -1,0 +1,32 @@
+# -*- mode: snippet -*-
+# name: CP Snippets List
+# key: cp
+# --
+/*
+╔════════════════════════════════╗
+║   COMPETITIVE PROGRAMMING      ║
+╠════════════════════════════════╣
+║ begin   → CP template          ║
+║ rep     → for loop             ║
+║ rrep    → reverse loop         ║
+║ each    → range-based for      ║
+║ readv   → read vector          ║
+║ printv  → print vector         ║
+║ test    → test cases           ║
+║ yes     → print YES            ║
+║ no      → print NO             ║
+║ sortv   → sort vector          ║
+║ uniq    → unique vector        ║
+║ lb      → lower_bound          ║
+║ ub      → upper_bound          ║
+║ gcd     → gcd                  ║
+║ lcm     → lcm                  ║
+║ debug   → debug variable       ║
+║ debv    → debug vector         ║
+║ INF     → int infinity         ║
+║ INFLL   → ll infinity          ║
+║ umap    → unordered_map        ║
+║ uset    → unordered_set        ║
+╚════════════════════════════════╝
+*/
+$0

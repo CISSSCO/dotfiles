@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: debug variable
+# key: debug
+# --
+cerr << "${1:var} = " << ${1:var} << "\n";

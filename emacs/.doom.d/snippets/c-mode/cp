@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: CP Snippets List
+# key: cp
+# --
+/*
+╔════════════════════════════════╗
+║   COMPETITIVE PROGRAMMING      ║
+╠════════════════════════════════╣
+║ begin   → CP template          ║
+║ rep     → for loop             ║
+║ rrep    → reverse loop         ║
+║ each    → range-based for      ║
+║ test    → test cases           ║
+║ yes     → print YES            ║
+║ no      → print NO             ║
+║ INF     → int infinity         ║
+║ INFLL   → ll infinity          ║
+╚════════════════════════════════╝
+*/
+$0

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: test loop
+# key: test
+# --
+int t;
+cin >> t;
+while (t--) {
+    $0
+}

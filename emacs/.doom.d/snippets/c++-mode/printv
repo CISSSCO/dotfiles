@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: print vector
+# key: printv
+# --
+for (auto &${1:x} : ${2:v}) cout << ${1:x} << " ";
+cout << "\n";

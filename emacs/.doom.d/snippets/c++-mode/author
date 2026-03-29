@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: author
+# key: author
+# --
+/*
+ * Author   : Cisco Ramon
+ * Language : C++
+ * Created  : `(format-time-string "%d-%b-%Y")`
+ * Time     : `(format-time-string "%H:%M:%S")`
+*/

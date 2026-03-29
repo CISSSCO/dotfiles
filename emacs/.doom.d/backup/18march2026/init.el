@@ -65,7 +65,7 @@
  ;;objed               ; text object editing for the innocent
  ;;parinfer            ; turn lisp into python, sort of
  ;;rotate-text         ; cycle region at point between text candidates
- (snippets +yas)             ; my elves. They type so I don't have to
+ snippets              ; my elves. They type so I don't have to
  word-wrap             ; soft wrapping with language-aware indent
  (undo +tree)          ; persistent undo history
 
@@ -124,9 +124,7 @@ impatient-mode        ; live browser reloading for web development
 ;;beancount         ; mind the GAAP
 ;;(cc +lsp)         ; C > C++ == 1
 ;;clojure           ; java with a lisp
-;; common-lisp        ; if you've seen one lisp, you've seen them all
-;;(common-lisp +sly)       ; if you've seen one lisp, you've seen them all
-;;(common-lisp +slime)       ; if you've seen one lisp, you've seen them all
+;;common-lisp       ; if you've seen one lisp, you've seen them all
 ;;coq               ; proofs-as-programs
 ;;crystal           ; ruby at the speed of c
 csharp              ; unity, .NET, and mono shenanigans
@@ -153,7 +151,7 @@ emacs-lisp          ; drown in parentheses
 
 json                ; At least it ain't XML
 ;;(java +lsp)         ; the poster child for carpal tunnel syndrome
-(javascript +tree-sitter)         ; all(hope(abandon(ye(who(enter(here))))))
+javascript          ; all(hope(abandon(ye(who(enter(here))))))
 julia               ; a better, faster MATLAB
 ;;kotlin              ; a better, slicker Java(Script)
 latex               ; writing papers in Emacs has never been so fun

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: INFLL
+# key: INFLL
+# --
+const long long INFLL = 1e18;

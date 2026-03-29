@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: unique vector
+# key: uniq
+# --
+${1:v}.erase(unique(${1:v}.begin(), ${1:v}.end()), ${1:v}.end());

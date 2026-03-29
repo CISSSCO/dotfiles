@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: INF
+# key: INF
+# --
+const int INF = 1e9;
