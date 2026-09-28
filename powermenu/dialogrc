@@ -1,0 +1,73 @@
+# ==============================================================================
+# Cosmic Singularity Dialog Theme
+# Derived from Black Hole Accretion Disk & Cosmic Nebula Wallpaper
+# ==============================================================================
+
+# Aspect ratio & tabs
+aspect = 0
+tab_len = 0
+visit_items = OFF
+use_scrollbar = OFF
+
+# Modern flat look - disable 1990s solid shadow blocks for sleek compositor aesthetics
+use_shadow = OFF
+use_colors = ON
+
+# Screen canvas
+screen_color = (CYAN,BLACK,OFF)
+shadow_color = (BLACK,BLACK,OFF)
+
+# Main Dialog Window
+dialog_color = (WHITE,BLACK,OFF)
+title_color = (YELLOW,BLACK,ON)
+border_color = (MAGENTA,BLACK,ON)
+border2_color = (MAGENTA,BLACK,ON)
+
+# Action Buttons
+button_active_color = (BLACK,YELLOW,ON)
+button_inactive_color = (WHITE,BLACK,OFF)
+button_key_active_color = (BLACK,YELLOW,ON)
+button_key_inactive_color = (CYAN,BLACK,ON)
+button_label_active_color = (BLACK,YELLOW,ON)
+button_label_inactive_color = (WHITE,BLACK,ON)
+
+# Input & Search
+inputbox_color = dialog_color
+inputbox_border_color = (CYAN,BLACK,ON)
+inputbox_border2_color = (CYAN,BLACK,ON)
+searchbox_color = dialog_color
+searchbox_title_color = title_color
+searchbox_border_color = border_color
+searchbox_border2_color = border_color
+position_indicator_color = title_color
+
+# Menubox Frame (Inner list border)
+menubox_color = (WHITE,BLACK,OFF)
+menubox_border_color = (CYAN,BLACK,ON)
+menubox_border2_color = (CYAN,BLACK,ON)
+
+# Menu Items
+item_color = (WHITE,BLACK,OFF)
+item_selected_color = (BLACK,YELLOW,ON)
+
+# Tags & Hotkeys
+tag_color = (YELLOW,BLACK,ON)
+tag_selected_color = (BLACK,YELLOW,ON)
+tag_key_color = (CYAN,BLACK,ON)
+tag_key_selected_color = (BLACK,YELLOW,ON)
+
+# Checkbox
+check_color = dialog_color
+check_selected_color = button_active_color
+
+# Arrows & Navigation Indicators
+uarrow_color = (CYAN,BLACK,ON)
+darrow_color = (CYAN,BLACK,ON)
+
+# Help & Forms
+itemhelp_color = (CYAN,BLACK,OFF)
+form_active_text_color = button_active_color
+form_text_color = (WHITE,CYAN,ON)
+form_item_readonly_color = (CYAN,WHITE,ON)
+gauge_color = title_color
+
